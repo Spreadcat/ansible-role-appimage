@@ -1,0 +1,24 @@
+---
+- name: MANAGE APPIMAGE DIRECTORY "{{ appimage_installation_dir }}"
+  become: true
+  file:
+    state: directory
+    path: "{{ appimage_installation_dir }}"
+    owner: "{{ appimage_owner }}"
+    group: "{{ appimage_group }}"
+    mode: '0755'
+
+- name: MANAGE APP SIMPLE INSTALLATION
+  include_tasks: install_simple.yml
+  vars:
+    install_simple_url: "{{ item }}"
+  when: > 
+    ( item is string ) and ( item is not mapping )
+  loop: "{{ appimage_download_urls }}"
+
+- name: MANAGE APP COMPLEX INSTALLATION
+  include_tasks: install_complex.yml
+  vars:
+    install_complex_url: "{{ item }}"
+  when: item is mapping
+  loop: "{{ appimage_download_urls }}"

@@ -1,0 +1,5 @@
+---
+# tasks file for appimage
+
+- name: INCLUDE INSTALL
+  include_tasks: install.yml

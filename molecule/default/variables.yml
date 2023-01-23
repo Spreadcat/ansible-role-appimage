@@ -1,0 +1,5 @@
+---
+appimage_download_urls:
+  - "https://github.com/Spreadcat/ansible-role-appimage/blob/master/files/hello-world-appimage-x86_64.AppImage"
+appimage_binary_dir: /usr/local/bin
+appimage_binary_appname: hello

@@ -1,0 +1,16 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+
+    - name: INCLUDE VARIABLES
+      ansible.builtin.include_vars: ./variables.yml
+
+    - name: VERIFY THE BINARY COMMAND IS AVAILABLE
+      ansible.builtin.command: "which {{ appimage_binary_appname }}"
+      register: _verify_binary
+      failed_when: _verify_binary.rc != 0
+      changed_when: _verify_binary.rc != 0

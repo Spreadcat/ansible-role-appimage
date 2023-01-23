@@ -1,0 +1,22 @@
+---
+# defaults file for appimage
+# Default download url for an image
+# appimage_download_urls:
+#   - https://example.com/appimage.image
+#   - name: my_application
+#     url: https://example.com/appimage.image
+#     state: present
+#
+appimage_download_urls: []
+
+# Default location for install appimages
+appimage_installation_dir: '/opt/appimage'
+
+# Default binary directory for appimage links
+appimage_binary_dir: /usr/local/bin
+
+# Default appimage installation dir owner
+appimage_owner: root
+
+# Default appimage installation dir group
+appimage_group: root
