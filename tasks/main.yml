@@ -1,5 +1,4 @@
 ---
 # tasks file for appimage
-
-- name: INCLUDE INSTALL
-  include_tasks: install.yml
+- name: Main | Include installation.
+  ansible.builtin.include_tasks: install.yml

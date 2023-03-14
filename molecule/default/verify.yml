@@ -6,10 +6,10 @@
   gather_facts: false
   tasks:
 
-    - name: INCLUDE VARIABLES
+    - name: Verify | Include variables.
       ansible.builtin.include_vars: ./variables.yml
 
-    - name: VERIFY THE BINARY COMMAND IS AVAILABLE
+    - name: Verify | Verify the binary file is in $path.
       ansible.builtin.command: "which {{ appimage_binary_appname }}"
       register: _verify_binary
       failed_when: _verify_binary.rc != 0
