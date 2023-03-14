@@ -1,23 +1,23 @@
 ---
 # Simple installation routine
-- name: CHECK IF THE APP IS IN PLACE ALREADY
-  stat:
-    path: "{{ appimage_installation_dir }}/{{ install_simple_url|basename }}"
+- name: Install simple | Check if the app is already in place.
+  ansible.builtin.stat:
+    path: "{{ appimage_installation_dir }}/{{ install_simple_url | basename }}"
   register: _appimage_install_status
 
-- name: DOWNLOAD MISSING APPIMAGES
+- name: Install simple | Download missing appimages.
   become: true
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ install_simple_url }}"
     mode: '0555'
-    dest: "{{ appimage_installation_dir }}/{{ install_simple_url|basename }}"
+    dest: "{{ appimage_installation_dir }}/{{ install_simple_url | basename }}"
   when: not _appimage_install_status.stat.exists
 
-- name: CREATE APPALIASES SIMPLE
+- name: Install simple | Create appalias
   become: true
-  file:
+  ansible.builtin.file:
     state: link
-    src: "{{ appimage_installation_dir }}/{{ install_simple_url|basename }}"
-    dest: "{{ appimage_binary_dir }}/{{ (install_simple_url|basename).split('-')[0]|lower }}"
+    src: "{{ appimage_installation_dir }}/{{ install_simple_url | basename }}"
+    dest: "{{ appimage_binary_dir }}/{{ (install_simple_url | basename).split('-')[0] | lower }}"
     owner: root
     group: root

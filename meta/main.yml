@@ -1,6 +1,7 @@
+---
 dependencies: []
 galaxy_info:
-  author: "Daniel Bu\xF8y-Vehn"
+  author: "Daniel Buøy-Vehn"
   company: ''
   description: No description.
   galaxy_tags: []
@@ -16,6 +17,6 @@ galaxy_info:
     - '37'
   - name: Ubuntu
     versions:
-    - Focal
-    - Jammy
+    - focal
+    - jammy
   role_name: appimage

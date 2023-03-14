@@ -1,10 +1,10 @@
 ---
-- name: Converge
+- name: Converge containers.
   hosts: all
   tasks:
-    - name:  MOLECULE - INCLUDE VARIABLES
+    - name: Converge | Inlcude variables.
       ansible.builtin.include_vars: ./variables.yml
 
-    - name: "Include spreadcat.appimage"
+    - name: Converge | Include spreadcat.appimage role.
       ansible.builtin.include_role:
         name: "spreadcat.appimage"

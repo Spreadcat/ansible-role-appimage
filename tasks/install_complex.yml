@@ -1,54 +1,54 @@
 ---
-- name: Determine application name
-  set_fact:
+- name: Install complex | Determine application name.
+  ansible.builtin.set_fact:
     appimage_application_name: >-
       {% if install_complex_url.name is defined -%}
-      {{ (install_complex_url.name|trim) }}
+      {{ (install_complex_url.name | trim) }}
       {% else -%}
-      {{ (install_complex_url.url|basename).split('-')[0]|lower|trim }}
+      {{ (install_complex_url.url | basename).split('-')[0] | lower | trim }}
       {% endif -%}
 
-- name: INSTALL APPLICATION
+- name: Install complex | Install application.
   when: (install_complex_url.state is not defined or
         (install_complex_url.state is defined and install_complex_url.state|lower != 'absent')
         )
   block:
-    - name: CHECK IF "{{ install_complex_url.url|basename }}" IS ALREADY IN PLACE
-      stat:
-        path: "{{ appimage_installation_dir }}/{{ install_complex_url.url|basename }}"
+    - name: Install complex | Check if "{{ install_complex_url.url | basename + ' is in place.' }}"
+      ansible.builtin.stat:
+        path: "{{ appimage_installation_dir }}/{{ install_complex_url.url | basename }}"
       register: _appimage_install_status
 
-    - name: DOWNLOAD MISSING APPIMAGES FOR "{{ appimage_application_name }}"
+    - name: Install complex | Download missing appimages for "{{ appimage_application_name }}"
       become: true
-      get_url:
+      ansible.builtin.get_url:
         url: "{{ install_complex_url.url }}"
         mode: '0555'
-        dest: "{{ appimage_installation_dir }}/{{ install_complex_url.url|basename }}"
+        dest: "{{ appimage_installation_dir }}/{{ install_complex_url.url | basename }}"
       when: not _appimage_install_status.stat.exists
 
-    - name: CREATE APPALIASES SIMPLE
+    - name: Install complex | Create appalias
       become: true
-      file:
+      ansible.builtin.file:
         state: link
-        src: "{{ appimage_installation_dir }}/{{ install_complex_url.url|basename }}"
-        dest: "{{ appimage_binary_dir }}/{{ appimage_application_name|trim }}"
+        src: "{{ appimage_installation_dir }}/{{ install_complex_url.url | basename }}"
+        dest: "{{ appimage_binary_dir }}/{{ appimage_application_name | trim }}"
         owner: root
         group: root
 
-- name: REMOVE APPLICATION
+- name: Install complex | Remove application
   become: true
   when:
     - install_complex_url.state is defined
     - install_complex_url.state|lower == 'absent'
   block:
-    - name: REMOVE ALIAS "{{ appimage_binary_dir }}/{{ appimage_application_name|trim }}"
+    - name: Install complex | Remove alias "{{ appimage_binary_dir + '/' + appimage_application_name | trim }}"
       become: true
-      file:
+      ansible.builtin.file:
         state: absent
-        path: "{{ appimage_binary_dir }}/{{ appimage_application_name|trim }}"
+        path: "{{ appimage_binary_dir }}/{{ appimage_application_name | trim }}"
 
-    - name: REMOVE APPIMAGE FILE "{{ install_complex_url.url|basename }}"
+    - name: Install complex | Remoe appimage file "{{ install_complex_url.url | basename }}"
       become: true
-      file:
+      ansible.builtin.file:
         state: absent
-        path: "{{ appimage_installation_dir }}/{{ install_complex_url.url|basename }}"
+        path: "{{ appimage_installation_dir }}/{{ install_complex_url.url | basename }}"
