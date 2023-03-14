@@ -1,22 +1,42 @@
 ---
-# defaults file for appimage
-# Default download url for an image
-# appimage_download_urls:
-#   - https://example.com/appimage.image
-#   - name: my_application
-#     url: https://example.com/appimage.image
-#     state: present
+# List of download urls for appimage files.
 #
+# Each list can either contain a plan appimage file URL or a more specific
+# dict with `name`, `url` and `state.
+#
+# Example:
+#   appimage_download_urls:
+#     - https://example.com/appimage.image
+#     - name: my_application
+#       url: https://example.com/appimage.image
+#       state: present
+# doca tags:role
 appimage_download_urls: []
 
-# Default location for install appimages
+# Path for storing the installed appimage files.
+#
+# Example:
+#   appimage_installation_dir: "/opt/appimage"
+# doca tags:other
 appimage_installation_dir: '/opt/appimage'
 
-# Default binary directory for appimage links
+# Path to the directory where to store the links for the appimage files.
+#
+# Example:
+#   appimage_binary_dir: "/usr/local/bin"
+# doca tags:other
 appimage_binary_dir: /usr/local/bin
 
-# Default appimage installation dir owner
+# Owner of the appimage installation directory.
+#
+# Example:
+#   appimage_owner: "root"
+# doca tags:other
 appimage_owner: root
 
-# Default appimage installation dir group
+# Group of the appimage installation directory.
+#
+# Example:
+#   appimage_group: "root"
+# doca tags:other
 appimage_group: root

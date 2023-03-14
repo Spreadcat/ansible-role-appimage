@@ -1,4 +1,4 @@
-# spreadcat.appimage
+# Role spreadcat.appimage
 
 Role which deploys appimage applications on the local host.
 
@@ -9,41 +9,37 @@ Role which deploys appimage applications on the local host.
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `defaults/main.yml`):
-
 ```yaml
-appimage_download_urls: []
+appimage_download_urls: list
 ```
 
-* List of download URLs for appimages. Takes either a list of strings or dicts. See `defaults/main.yml` for details. Using the dict allows it to uninstall an appimage and to set the application name that shall be used to start the application.
+* List of download URLs for appimage files.
+
+## Other Variables
 
 ```yaml
-appimage_installation_dir: '/opt/appimage'
+appimage_binary_dir: str
 ```
 
-* Default installation dir for appimage applications.
-
-## Other variables
-
-Second class variables, not immediately needed.
+* Path to the directory where to store the links for the appimage files.
 
 ```yaml
-appimage_owner: root
+appimage_group: str
 ```
 
-* Default user name which owns the appimage files.
+* Group of the appimage installation directory.
 
 ```yaml
-appimage_group: root
+appimage_installation_dir: str
 ```
 
-* Default group name which owns the appimage files.
+* Path for storing the installed appimage files.
 
 ```yaml
-appimage_binary_dir: /usr/local/bin
+appimage_owner: str
 ```
 
-* Destination directory where the file to start the application will be linked to.
+* Owner of the appimage installation directory.
 
 ## Dependencies
 
